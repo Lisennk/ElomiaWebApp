@@ -1,0 +1,12 @@
+@import 'base.scss';
+
+#app {
+  flex-grow: 1;
+  font-weight: normal;
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+  }
+}
