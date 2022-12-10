@@ -72,7 +72,7 @@ export default {
      * @returns {Promise<void>}
      */
     async checkTextSafety(text) {
-      axios.post(`https://webapp.api.elomia.com/conversation/response/create`, {
+      axios.post(`https://webapp.api.elomia.com/classification/text/safety/classify`, {
         text: text.trim()
       }).then(response => {
         const tags = response.data.data.classifiedTags;
