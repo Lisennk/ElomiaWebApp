@@ -54,7 +54,7 @@ export default {
       this.sessionStarted = true;
       this.saveNewUserMessage();
       this.loading = true;
-      axios.post(`http://0.0.0.0:1110/conversation/response/create`, {
+      axios.post(`https://webapp.api.elomia.com/conversation/response/create`, {
         conversation: this.chatHistory
       }).then(response => {
         this.loading = false;
@@ -72,7 +72,7 @@ export default {
      * @returns {Promise<void>}
      */
     async checkTextSafety(text) {
-      axios.post(`http://0.0.0.0:1110/classification/text/safety/classify`, {
+      axios.post(`https://webapp.api.elomia.com/conversation/response/create`, {
         text: text.trim()
       }).then(response => {
         const tags = response.data.data.classifiedTags;
