@@ -3,7 +3,7 @@ const elomiaAiServicesClient = require('../../components/services/Elomia/clients
 /**
  * Empathy controller
  */
-class ResponseController {
+class TextClassificationController {
 
     /**
      * Creates empathy
@@ -11,19 +11,17 @@ class ResponseController {
      * @param res
      * @returns {Promise<any>}
      */
-    static async create(req, res) {
+    static async classifySafety(req, res) {
 
         try {
 
 
-            let response = await elomiaAiServicesClient.getResponseFor(req.body.conversation);
+            let result = await elomiaAiServicesClient.getGeneralSafetyClassificationResults(req.body.text);
 
             return res.send({
                 success: true,
-                type: 'RESPONSE',
-                response: {
-                    text: response.text
-                }
+                type: 'CLASSIFICATION_RESULT',
+                data: result
             });
 
         } catch (e) {
@@ -37,4 +35,4 @@ class ResponseController {
     }
 }
 
-module.exports = ResponseController;
+module.exports = TextClassificationController;

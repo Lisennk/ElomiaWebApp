@@ -10,3 +10,46 @@
     display: flex;
   }
 }
+
+.bottomSheetOverlay {
+
+  .v-overlay__content {
+    height: auto !important;
+    width: 100%;
+    max-width: 48rem !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: auto !important;
+    right: auto !important;
+
+    .bottomSheet {
+      margin-top: auto;
+      padding: 1.25rem;
+      background: #fff;
+      border: 0;
+      border-radius: 1.5rem 1.5rem 0 0;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 1rem 0;
+      }
+
+      .content {
+        font-size: 1.1rem;
+        flex-grow: 1;
+
+        p:not(:first-child) {
+          margin-top: 1rem;
+        }
+      }
+
+      .controls {
+        padding-top: 2.5rem;
+      }
+    }
+  }
+}
