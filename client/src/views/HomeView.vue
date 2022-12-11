@@ -54,7 +54,7 @@ export default {
 
         this.steps.push({
           type: 'text',
-          text: `First, let\'s look more closely at the problem you described.\n\nI will ask about ${awarenessBlock.length} questions, and you will need to write a detailed answer to each one.`
+          text: `First, let\'s look more closely at the problem you described.\nI will ask about ${awarenessBlock.length} questions, and you will need to write a detailed answer to each one.`
         });
 
         for (let i = 0; i < awarenessBlock.length; i++) {
@@ -63,7 +63,7 @@ export default {
             type: 'question',
             question: question,
             description: i < 3 ? 'Write down every thought that comes into your mind. The more the better.' : 'To find a solution, even the smallest details are important.',
-            needsPersonalization: i !== 0 ? Math.random() > 0.5 : false,
+            needsPersonalization: i !== 0 ? (i === 1 ? true :Math.random() > 0.4) : false,
             answer: '',
           })
         }
@@ -84,7 +84,7 @@ export default {
             type: 'question',
             question: question,
             description: i < 3 ? 'There are no wrong answers here. Every idea you come up with brings us closer to the solution.' : 'Think deep and use your imagination.',
-            needsPersonalization: Math.random() > 0.7,
+            needsPersonalization: Math.random() > 0.5,
             answer: '',
           })
         }
@@ -115,6 +115,7 @@ export default {
 
       if (this.currentStep.question && !this.currentStep.answer) {
         alert(`Please, write a response to the question`);
+        return;
       }
 
       if (this.nextStep) {
@@ -151,7 +152,7 @@ export default {
 
             if (response) {
               const prefix = response.data.data;
-              this.nextStep.question = `${prefix} ${this.nextStep.question}`;
+              this.nextStep.question = `${prefix}\n${this.nextStep.question}`;
             }
 
             this.isLoading = false;
@@ -165,7 +166,16 @@ export default {
             });
 
         } else {
-          this.currentStepIndex++;
+
+          if (this.currentStep.type === 'question') {
+            this.isLoading = true;
+            setTimeout(() => {
+              this.currentStepIndex++;
+              this.isLoading = false;
+            }, Math.random() * 5000);
+          } else {
+            this.currentStepIndex++;
+          }
         }
       }
     }
@@ -179,7 +189,7 @@ export default {
   <v-layout>
     <v-main>
       <div class="progressContainer" v-if="this.steps.length > 0">
-        <div class="progressBar" :style="{width: `${Math.round(this.currentStepIndex/this.steps.length)}%`}"></div>
+        <div class="progressBar" :style="{width: `${Math.round((this.currentStepIndex/this.steps.length)*100)}%`}"></div>
       </div>
       <div class="home">
         <div class="step" v-if="steps.length === 0">
@@ -218,11 +228,13 @@ export default {
 .progressContainer {
   background: #e3e3e3;
   height: 1rem;
+  transition: all 2s ease-out;
 
   .progressBar {
     height: 100%;
     width:10%;
     background: black;
+    transition: all 2s ease-out;
   }
 }
 .home {
@@ -240,6 +252,7 @@ export default {
       font-size: 1.4rem;
       margin-top: 2rem;
       margin-bottom: 2rem;
+      white-space: pre-wrap;
     }
 
     .avatar {
@@ -257,6 +270,7 @@ export default {
 
     .question {
       font-size: 1.45rem;
+      white-space: pre-wrap;
     }
 
     .description {
