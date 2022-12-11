@@ -112,6 +112,11 @@ export default {
     },
 
     continue() {
+
+      if (this.currentStep.question && !this.currentStep.answer) {
+        alert(`Please, write a response to the question`);
+      }
+
       if (this.nextStep) {
         if (this.nextStep.needsPersonalization) {
 
@@ -173,8 +178,8 @@ export default {
 <template>
   <v-layout>
     <v-main>
-      <div class="progressContainer">
-        <div class="progressBar"></div>
+      <div class="progressContainer" v-if="this.steps.length > 0">
+        <div class="progressBar" :style="{width: `${Math.round(this.currentStepIndex/this.steps.length)}%`}"></div>
       </div>
       <div class="home">
         <div class="step" v-if="steps.length === 0">
