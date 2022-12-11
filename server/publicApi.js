@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
 
 app.use('/conversation', require('./http/routes/conversationRoutes'));
 app.use('/classification', require('./http/routes/classificationRoutes'));
+app.use('/selfAnalysis', require('./http/routes/selfAnalysisRoutes'));
 
 const port = config.get('server.port');
 server.listen(port, () => console.log(`Public API app listening on port ${port}!`))

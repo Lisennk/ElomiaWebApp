@@ -277,9 +277,6 @@ export default {
       <button v-if="sessionStarted && !loading" @click="retry" class="retry">
         <refresh-icon /> Try again
       </button>
-      <button v-if="!sessionStarted" @click="showGuide" class="retry">
-        <information-icon /> How to use it?
-      </button>
       <div>
       <div class="inputContainer">
         <v-textarea @click:appendInner="send()" v-model="userMessageText" variant="solo" auto-grow no-resize rows="1" append-inner-icon="mdi-send"></v-textarea>
