@@ -119,7 +119,7 @@ export default {
       }
 
       if (this.nextStep) {
-        if (this.nextStep.needsPersonalization) {
+        if (false) {
 
           this.isLoading = true;
 
